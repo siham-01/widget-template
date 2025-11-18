@@ -1,0 +1,42 @@
+.arrange-code-widget .block-container {
+    background-color: white;
+    border: 0.2em solid var(--neutral-100);
+    border-radius: var(--border-radius);
+    margin: 0.4em 0;
+    padding: 0.5em 0.5em 0 0.5em;
+    transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.arrange-code-widget .block-container.dragged {
+    opacity: 0.5;
+}
+
+.arrange-code-widget .block-container.dragover-down {
+    border-bottom-color: var(--purple-400);
+}
+
+.arrange-code-widget .block-container.dragover-up {
+    border-top-color: var(--purple-400);
+}
+
+.arrange-code-widget .block {
+    pointer-events: none;
+    width: 100%;
+}
+
+.arrange-code-widget .code-container {
+    background-color: white;
+    border: 0.2em solid var(--neutral-100);
+    border-radius: var(--border-radius);
+    padding: 0.7em 1em 0.7em 1em;
+    transition: 0.1s ease-in-out;
+}
+
+.arrange-code-widget .code-container.correct {
+    background: linear-gradient(
+        207deg,
+        rgba(204, 238, 242, 1) 0%,
+        rgba(134, 213, 224, 1) 40%,
+        rgba(162, 169, 242, 1) 100%
+    );
+}
