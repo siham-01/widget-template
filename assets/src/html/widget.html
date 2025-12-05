@@ -5,7 +5,7 @@
   <!-- Metadata -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Page Title</title>
+  <title>Variables: The Magic Storage Box</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,11 +18,109 @@
 </head>
 
 <body>
+  <div class="column column-md">
+    <section>
+      <div class="text">
+        <h1>What is a Variable?</h1>
+        <p>Imagine you have a magic box with a label on it. You can put anything inside this box, and whenever you need it, you can look inside to see what's there. You can even change what's inside whenever you want!</p>
+        <p>In programming, a <strong>variable</strong> is just like that magic box. It has a name (the label) and it stores a value (what's inside).</p>
+      </div>
+      <button class="button-semantic button-primary button-continue">
+        <span class="button-text">Continue</span>
+        <svg class="button-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 8L14.59 6.59L9 12.17V0H7V12.17L1.42 6.58L0 8L8 16L16 8Z" fill="white" />
+        </svg>
+      </button>
+    </section>
+     <section>
+      <div class="text">
+        <h2>Try It Yourself!</h2>
+        <p>Below is a variable called <code>myMagicBox</code>. Right now, it's empty. Let's store something inside it!</p>
+      </div>
+
+      <div class="widget variable-widget">
+        <div class="variable-label">Variable: myMagicBox</div>
+        <div class="variable-box" id="variableDisplay">
+          <span style="color: var(--neutral-400); font-size: 0.5em;">empty</span>
+        </div>
+
+        <div class="input-group">
+          <input type="text" class="variable-input" id="valueInput" placeholder="Type anything here...">
+        </div>
+
+        <div class="action-buttons">
+          <button class="button-semantic button-primary" id="storeBtn">
+            <span class="button-text">Store Value</span>
+          </button>
+          <button class="button-semantic button-secondary" id="clearBtn">
+            <span class="button-text">Clear Box</span>
+          </button>
+        </div>
+      </div>
+      <button class="button-semantic button-primary button-continue">
+        <span class="button-text">Continue</span>
+        <svg class="button-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 8L14.59 6.59L9 12.17V0H7V12.17L1.42 6.58L0 8L8 16L16 8Z" fill="white" />
+        </svg>
+      </button>
+    </section>
+    <section>
+      <div class="text">
+        <h2>What Did You Just Do?</h2>
+        <p>You just learned the two most important things about variables:</p>
+        <p><strong>1. Storing a value:</strong> When you typed something and clicked "Store Value," you put information into your variable. This is like putting a toy in your magic box.</p>
+        <p><strong>2. Changing a value:</strong> You can store something new anytime! Try typing different things and clicking "Store Value" again. The old value disappears and the new one takes its place.</p>
+        <p>Variables are super useful because programmers need to remember information and change it as their program runs. Now you know how variables work!</p>
+      </div>
+    </section>
+  </div>
+
   <script type="module">
     import { WidgetPage } from "../js/WidgetPage.js";
 
+   class VariableWidget {
+    constructor(container, page) {
+      this.container = container;
+      this.page = page;
+      this.setup();
+    }
+
+    setup() {
+      this.display = this.container.querySelector('#variableDisplay');
+      this.input = this.container.querySelector('#valueInput');
+      this.storeBtn = this.container.querySelector('#storeBtn');
+      this.clearBtn = this.container.querySelector('#clearBtn');
+
+      this.storeBtn.addEventListener('click', () => this.storeValue());
+      this.clearBtn.addEventListener('click', () => this.clearValue());
+
+      this.input.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') this.storeValue();
+      });
+    }
+
+    storeValue() {
+      const value = this.input.value.trim();
+      if (value) {
+        this.display.innerHTML = value;
+        this.display.classList.add('updated');
+        setTimeout(() => this.display.classList.remove('updated'), 300);
+      }
+    }
+
+    clearValue() {
+      this.display.innerHTML =
+        '<span style="color: var(--neutral-400); font-size: 0.5em;">empty</span>';
+      this.input.value = '';
+    }
+
+    onResize() {}
+  }
     document.addEventListener("DOMContentLoaded", () => {
       const widgetPage = new WidgetPage("widget-page-template", document.body);
+      widgetPage.registerWidget(".variable-widget", VariableWidget);
     });
   </script>
 </body>
